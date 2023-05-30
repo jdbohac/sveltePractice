@@ -1,2 +1,27 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+
+        <script>
+        
+		import { Accordion, AccordionItem } from '@skeletonlabs/skeleton'
+		let number = 0
+
+		const clickCount = () => {
+	        number += 1
+		    return number
+		  }
+		</script>
+		<div id="logo">
+		<img class="" src="./hunnybuslogo.webp" alt="">
+		</div>
+		<button on:click={clickCount}>{number}</button>
+		<Accordion>
+		    <AccordionItem open>
+		        <svelte:fragment slot="summary">Hello</svelte:fragment>
+		    </AccordionItem>
+		</Accordion>
+
+        <style>
+        #logo{
+        display: flex;
+        justify-content: center;
+        }
+        </style>
