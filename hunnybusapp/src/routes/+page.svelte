@@ -13,14 +13,11 @@
 	        number += 1
 		    return number
 		  }
-		  onMount(() => {
-		  fetch('http://localhost:3003/events').then(response => response.json).then(data => {
-			console.log(data)
-			eventsArray.set(data)
-		}).catch((error) => {
-			console.log(error)
-		})
-		  }, [])
+		  onMount( async () => {
+		    const response = await fetch('http://localhost:3003/events')
+		     eventsArray = await response.json()
+		    console.log(eventsArray)
+		  })
 		</script>
 		<div id="logo">
 		<img class="" src="./hunnybuslogo.webp" alt="">
