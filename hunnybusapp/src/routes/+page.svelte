@@ -2,6 +2,7 @@
         <script>
         
 		import { Accordion, AccordionItem } from '@skeletonlabs/skeleton'
+		import { Datepicker } from 'svelte-calendar'
 		let number = 0
 
 		const clickCount = () => {
@@ -18,7 +19,7 @@
 		        <svelte:fragment slot="summary">Hello</svelte:fragment>
 		    </AccordionItem>
 		</Accordion>
-
+		<Datepicker />
         <style>
         #logo{
         display: flex;
