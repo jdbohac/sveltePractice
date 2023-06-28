@@ -14,7 +14,7 @@
 	        number += 1
 		    return number
 		  }
-		  const getEvents = async () => {
+		  $: getEvents = async () => {
 		  eventsArray = []
 		   const response = await fetch('http://localhost:3003/events')
 		    eventsArray = await response.json()
@@ -47,7 +47,7 @@
 		        <svelte:fragment slot="summary">Hello</svelte:fragment>
 		    </AccordionItem>
 		</Accordion>
-		<AddAppointment />
+		<AddAppointment getEvents={getEvents} />
         <style>
         #logo{
         display: flex;

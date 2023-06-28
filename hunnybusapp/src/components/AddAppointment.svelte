@@ -1,5 +1,5 @@
 <script>
-export let eventsArray = writable([])
+export let getEvents
 import axios from 'axios'
     import { writable } from 'svelte/store';
         let event = {
@@ -14,13 +14,14 @@ import axios from 'axios'
 		  const addEvent = async  () => {
 			  await axios.post('http://localhost:3003/events', event).then((response) =>{
 			    console.log(response)
-			    eventsArray.push(event)
+			    getEvents()
+			    document.getElementById('addForm').reset()
 		  })
 		  }
 </script>
 
 <div>
-		<form class="form-container" on:submit={addEvent}>
+		<form class="form-container" id="addForm" on:submit={addEvent}>
 			<label for="name">Client Name(s)</label>
 			<input type="text" name="name" id="name" on:change={handleChange}>
 			<input type="date" name="date" id="date" on:change={handleChange}>
