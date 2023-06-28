@@ -6,7 +6,7 @@
 		import { Datepicker } from 'svelte-calendar'
 		import axios from 'axios'
 		
-		let eventsArray = []
+		$: eventsArray = []
 		
 		let number = 0
 		
@@ -14,15 +14,19 @@
 	        number += 1
 		    return number
 		  }
-		  
+		  const getEvents = async () => {
+		  eventsArray = []
+		   const response = await fetch('http://localhost:3003/events')
+		    eventsArray = await response.json()
+		  }
 		  const deleteEvent = async (id) => {
 		    await axios.delete('http://localhost:3003/events/' + id).then((response) => {
 		        console.log(response)
+		        getEvents()
 		    })
 		  }
 		  onMount(async() => {
-		  const response = await fetch('http://localhost:3003/events')
-		    eventsArray = await response.json()
+		    getEvents()
 		  })
 		</script>
 		<div id="logo">

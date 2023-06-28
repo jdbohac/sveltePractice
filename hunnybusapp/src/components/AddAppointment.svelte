@@ -1,4 +1,7 @@
 <script>
+export let eventsArray = writable([])
+import axios from 'axios'
+    import { writable } from 'svelte/store';
         let event = {
 			name: String,
 			date: Date,
@@ -19,12 +22,12 @@
 <div>
 		<form class="form-container" on:submit={addEvent}>
 			<label for="name">Client Name(s)</label>
-			<input type="text" name="name" on:change={handleChange}>
-			<input type="date" name="date" on:change={handleChange}>
+			<input type="text" name="name" id="name" on:change={handleChange}>
+			<input type="date" name="date" id="date" on:change={handleChange}>
 			<label for="address">Venue Address</label>
-			<input type="text" name="address" on:change={handleChange}>
+			<input type="text" name="address" id="address" on:change={handleChange}>
 			<label for="supplies">supplies needed</label>
-			<textarea name="supplies" rows="4" on:change={handleChange}></textarea>
+			<textarea name="supplies" rows="4" id="supplies" on:change={handleChange}></textarea>
 			<input type="submit">
 		</form>
 	</div>
