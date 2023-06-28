@@ -2,6 +2,7 @@
         <script>
         import { onMount } from 'svelte'
 		import { Accordion, AccordionItem } from '@skeletonlabs/skeleton'
+		import AddAppointment from '../components/AddAppointment.svelte'
 		import { Datepicker } from 'svelte-calendar'
 		import axios from 'axios'
 		
@@ -9,31 +10,14 @@
 		
 		let number = 0
 		
-		let event = {
-			name: String,
-			date: Date,
-			address: String,
-			supplies: String
-		}
-		
 		const clickCount = () => {
 	        number += 1
 		    return number
 		  }
 		  
-		  const handleChange = (e) => {
-		    event = {...event, [e.target.name]: e.target.value }
-		  }
-		  const addEvent = async  () => {
-			  await axios.post('http://localhost:3003/events', event).then((response) =>{
-			    console.log(response)
-			    eventsArray.push(event)
-		  })
-		  }
 		  const deleteEvent = async (id) => {
 		    await axios.delete('http://localhost:3003/events/' + id).then((response) => {
 		        console.log(response)
-		        onMount()
 		    })
 		  }
 		  onMount(async() => {
@@ -59,26 +43,10 @@
 		        <svelte:fragment slot="summary">Hello</svelte:fragment>
 		    </AccordionItem>
 		</Accordion>
-		<div>
-		<form class="form-container" on:submit={addEvent}>
-			<label for="name">Client Name(s)</label>
-			<input type="text" name="name" on:change={handleChange}>
-			<input type="date" name="date" on:change={handleChange}>
-			<label for="address">Venue Address</label>
-			<input type="text" name="address" on:change={handleChange}>
-			<label for="supplies">supplies needed</label>
-			<textarea name="supplies" rows="4" on:change={handleChange}></textarea>
-			<input type="submit">
-		</form>
-		</div>
+		<AddAppointment />
         <style>
         #logo{
         display: flex;
         justify-content: center;
-        }
-        .form-container{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         </style>
