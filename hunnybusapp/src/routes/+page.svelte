@@ -1,15 +1,18 @@
 
-        <script>
+    <script>
         import { onMount } from 'svelte'
 		import { Accordion, AccordionItem } from '@skeletonlabs/skeleton'
 		import AddAppointment from '../components/AddAppointment.svelte'
 		import { Datepicker } from 'svelte-calendar'
 		import axios from 'axios'
+        import UpdateEvent from '../components/UpdateEvent.svelte';
 		
 		$: eventsArray = []
-		
+		$: showUpdate = false
 		let number = 0
-		
+		const revealUpdate = () =>{
+			showUpdate=!showUpdate
+		}
 		const clickCount = () => {
 	        number += 1
 		    return number
@@ -38,6 +41,10 @@
 		<p>{event.date}</p>
 		<p>{event.address}</p>
 		<p>{event.supplies}</p>
+		<button on:click={revealUpdate}>Edit</button>
+		{#if showUpdate}
+		<UpdateEvent  event={event} getEvents={getEvents} revealUpdate={revealUpdate} />
+		{/if}
 		<form on:submit={()=>deleteEvent(event._id)}>
 			<input type="submit" value="delete">
 		</form>
